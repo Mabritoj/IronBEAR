@@ -10,6 +10,11 @@ describe('Hero', () => {
     );
   });
 
+  it('shows the develop, deploy, iterate motto', () => {
+    render(<Hero />);
+    expect(screen.getByText('Develop | Deploy | Iterate')).toBeInTheDocument();
+  });
+
   it('links its calls to action to the work section and GitHub', () => {
     render(<Hero />);
     expect(screen.getByRole('link', { name: 'VIEW SELECTED WORK' })).toHaveAttribute(

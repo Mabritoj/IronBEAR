@@ -13,11 +13,10 @@ export function Methodology() {
             <SectionLabel label="Approach" />
             <div className={styles.headline}>
               <h2 id="methodology-title" className={styles.title}>
-                ORCHESTRATE | OBSERVE | ADAPT.
+                DEVELOP | DEPLOY | ITERATE.
               </h2>
               <p className={styles.summary}>
-                A three-phase approach that keeps every project structured, visible, and easy to
-                improve.
+                A three-phase loop that keeps every project tested, repeatable, and easy to improve.
               </p>
             </div>
           </div>

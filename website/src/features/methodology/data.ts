@@ -9,30 +9,30 @@ export interface Phase {
 
 export const phases: Phase[] = [
   {
-    id: 'orchestrate',
+    id: 'develop',
     index: '01',
     phaseLabel: 'PHASE ONE',
-    title: 'ORCHESTRATE',
+    title: 'DEVELOP',
     description:
-      'Define how the pieces fit before building: interfaces, integrations, and data flow. Clear structure is the first deliverable.',
-    stack: 'AWS · MCP · A.I',
+      'Build in small, typed, tested steps. Clear interfaces and fast tests make every change easy to trust.',
+    stack: 'TypeScript · React · Claude Code',
   },
   {
-    id: 'observe',
+    id: 'deploy',
     index: '02',
     phaseLabel: 'PHASE TWO',
-    title: 'OBSERVE',
+    title: 'DEPLOY',
     description:
-      'Make system state visible. Status displays, dashboards, and logs turn hidden behavior into something you can act on.',
-    stack: 'CloudWatch · Github',
+      'Ship through infrastructure as code. The whole stack lives in a template, so every release is repeatable and easy to review.',
+    stack: 'AWS SAM · CloudFront',
   },
   {
-    id: 'adapt',
+    id: 'iterate',
     index: '03',
     phaseLabel: 'PHASE THREE',
-    title: 'ADAPT',
+    title: 'ITERATE',
     description:
-      'Use what the data shows to shape the next iteration. Short feedback loops, less friction, and changes that stay small.',
+      'Use what the data shows to shape the next round. Short feedback loops, less friction, and changes that stay small.',
     stack: 'Jira · Confluence',
   },
 ];
