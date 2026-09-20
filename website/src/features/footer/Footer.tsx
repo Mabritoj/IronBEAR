@@ -1,6 +1,7 @@
 import bearMark from '../../assets/bear-mark.webp';
 import { Container } from '../../components/Container';
 import { TextLink } from '../../components/TextLink';
+import { GITHUB_URL } from '../../config/site';
 import styles from './Footer.module.css';
 
 export function Footer() {
@@ -11,7 +12,7 @@ export function Footer() {
           <img className={styles.logo} src={bearMark} alt="IronBEAR" width={120} height={32} />
           <ul className={styles.social} aria-label="Social links">
             <li>
-              <TextLink label="GitHub" href="https://github.com/mabritoj" />
+              <TextLink label="GitHub" href={GITHUB_URL} />
             </li>
             <li>
               <TextLink label="LinkedIn" />

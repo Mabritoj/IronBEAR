@@ -1,6 +1,7 @@
 import bearMark from '../../assets/bear-mark.webp';
 import { ButtonLink } from '../../components/ButtonLink';
 import { Container } from '../../components/Container';
+import { GITHUB_URL } from '../../config/site';
 import styles from './Hero.module.css';
 
 export function Hero() {
@@ -30,7 +31,7 @@ export function Hero() {
               <ButtonLink label="VIEW SELECTED WORK" href="#work" />
               <ButtonLink
                 label="GITHUB / IRONBEAR"
-                href="https://github.com/mabritoj"
+                href={GITHUB_URL}
                 variant="secondary"
                 external
               />

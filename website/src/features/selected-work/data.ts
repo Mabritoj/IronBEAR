@@ -1,51 +1,57 @@
+import { GITHUB_URL } from '../../config/site';
+
 export interface Project {
   id: string;
   index: string;
   title: string;
   description: string;
   technologies: string[];
+  /** Headline line for the "at a glance" panel. Facts from the repo only, no invented results. */
   metric: string;
-  /** Omit until the case study exists; the card then shows inert text instead of a dead link. */
-  caseStudyUrl?: string;
+  /** Live site, when the project has one. */
+  siteUrl?: string;
   repoLabel: string;
   repoUrl: string;
-  /** Renders the card on the dark surface instead of the light one. */
-  featured?: boolean;
+  /** Card surface. Set explicitly so the list alternates dark, light, dark. */
+  tone: 'dark' | 'light';
 }
 
 export const projects: Project[] = [
   {
-    id: 'forge',
+    id: 'filacrypt',
     index: '01',
-    title: 'FORGE / EVENT CORE',
+    title: 'FILACRYPT',
     description:
-      'A fault-tolerant event pipeline that converts high-volume product telemetry into query-ready analytical facts within seconds.',
-    technologies: ['RUST', 'KAFKA', 'CLICKHOUSE'],
-    metric: '4.2B EVENTS / DAY',
-    repoLabel: 'GITHUB / FORGE',
-    repoUrl: 'https://github.com/mabritoj',
-    featured: true,
+      'An NFC-native inventory tracker for 3D printer filament spools. Tap a tagged spool to pull up its brand, material, drying profile, and remaining weight.',
+    technologies: ['REACT', 'TYPESCRIPT', 'AWS SAM'],
+    metric: 'EVERY SPOOL, TRACKED TO THE GRAM',
+    siteUrl: 'https://filacrypt.com',
+    repoLabel: 'GITHUB / FILACRYPT',
+    repoUrl: `${GITHUB_URL}/Filacrypt`,
+    tone: 'dark',
   },
   {
-    id: 'northstar',
+    id: 'prusa-widget',
     index: '02',
-    title: 'NORTHSTAR CLI',
+    title: 'PRUSA STATUS WIDGET',
     description:
-      'An open developer toolkit for authoring, validating, and distributing service templates consistently across engineering teams.',
-    technologies: ['GO', 'NIX', 'GITHUB ACTIONS'],
-    metric: '38% FASTER BOOTSTRAP',
-    repoLabel: 'GITHUB / NORTHSTAR',
-    repoUrl: 'https://github.com/mabritoj',
+      'A Corsair Xeneon Edge widget that shows live Prusa printer status (state, current job, progress, and temperatures) through a small local bridge server.',
+    technologies: ['JAVASCRIPT', 'NODE.JS', 'ICUE'],
+    metric: 'REAL-TIME PRINTER STATUS',
+    repoLabel: 'GITHUB / PRUSA-WIDGET',
+    repoUrl: `${GITHUB_URL}/Corsair-Xeneon---Prusa-Widget`,
+    tone: 'light',
   },
   {
-    id: 'bastion',
+    id: 'ironbear-plugins',
     index: '03',
-    title: 'BASTION CONTROL',
+    title: 'IRONBEAR PLUGINS',
     description:
-      'An infrastructure access governance platform that makes permissions legible, reviewable, and time-bounded by design.',
-    technologies: ['TYPESCRIPT', 'POSTGRES', 'OPA'],
-    metric: 'ZERO STANDING ACCESS',
-    repoLabel: 'GITHUB / BASTION',
-    repoUrl: 'https://github.com/mabritoj',
+      'A Claude Code plugin marketplace of installable skills, agents, hooks, and MCP configs, including AWS SAM and Corsair iCUE widget skills.',
+    technologies: ['CLAUDE CODE', 'AWS SAM', 'ICUE'],
+    metric: '2 INSTALLABLE PLUGINS',
+    repoLabel: 'GITHUB / CLAUDE',
+    repoUrl: `${GITHUB_URL}/claude`,
+    tone: 'dark',
   },
 ];

@@ -8,7 +8,7 @@
   background: var(--card-bg);
 }
 
-.featured {
+.dark {
   --card-bg: var(--color-ink);
   --card-title: var(--color-text);
   --card-desc: var(--color-text-muted);
@@ -115,7 +115,7 @@
   gap: 8px;
 }
 
-.caseStudy {
+.site {
   color: var(--card-link);
   font-size: var(--fs-mono);
 }

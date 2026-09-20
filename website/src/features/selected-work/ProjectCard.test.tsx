@@ -9,17 +9,19 @@ const project: Project = {
   title: 'DEMO SYSTEM',
   description: 'A demo project.',
   technologies: ['RUST', 'GO'],
-  metric: '10X FASTER',
+  metric: 'AT SCALE',
   repoLabel: 'GITHUB / DEMO',
-  repoUrl: 'https://github.com/mabritoj',
+  repoUrl: 'https://github.com/mabritoj/demo',
+  tone: 'light',
 };
 
 describe('ProjectCard', () => {
-  it('renders the title, description, metric and technologies', () => {
+  it('renders the title, description, headline and technologies', () => {
     render(<ProjectCard project={project} />);
     expect(screen.getByRole('heading', { level: 3, name: 'DEMO SYSTEM' })).toBeInTheDocument();
     expect(screen.getByText('A demo project.')).toBeInTheDocument();
-    expect(screen.getByText('10X FASTER')).toBeInTheDocument();
+    expect(screen.getByText('AT A GLANCE')).toBeInTheDocument();
+    expect(screen.getByText('AT SCALE')).toBeInTheDocument();
     const tags = within(screen.getByRole('list', { name: 'Technologies' })).getAllByRole(
       'listitem',
     );
@@ -30,21 +32,27 @@ describe('ProjectCard', () => {
     render(<ProjectCard project={project} />);
     expect(screen.getByRole('link', { name: 'GITHUB / DEMO' })).toHaveAttribute(
       'href',
-      'https://github.com/mabritoj',
+      'https://github.com/mabritoj/demo',
     );
   });
 
-  it('shows the case study as inert text until a URL exists', () => {
+  it('shows no live-site link when the project has no site', () => {
     render(<ProjectCard project={project} />);
-    expect(screen.getByText(/CASE STUDY/)).toBeInTheDocument();
-    expect(screen.queryByRole('link', { name: 'CASE STUDY' })).not.toBeInTheDocument();
+    expect(screen.queryByText(/LIVE SITE/)).not.toBeInTheDocument();
   });
 
-  it('links the case study once a URL is provided', () => {
-    render(<ProjectCard project={{ ...project, caseStudyUrl: 'https://example.com/case' }} />);
-    expect(screen.getByRole('link', { name: 'CASE STUDY' })).toHaveAttribute(
+  it('links the live site when a URL is provided', () => {
+    render(<ProjectCard project={{ ...project, siteUrl: 'https://example.com' }} />);
+    expect(screen.getByRole('link', { name: 'LIVE SITE' })).toHaveAttribute(
       'href',
-      'https://example.com/case',
+      'https://example.com',
     );
+  });
+
+  it('applies the surface for its tone', () => {
+    const { rerender } = render(<ProjectCard project={project} />);
+    expect(screen.getByRole('article')).toHaveClass('light');
+    rerender(<ProjectCard project={{ ...project, tone: 'dark' }} />);
+    expect(screen.getByRole('article')).toHaveClass('dark');
   });
 });
