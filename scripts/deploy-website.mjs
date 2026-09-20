@@ -1,37 +1,65 @@
 // Builds website/, syncs it to the site bucket, then invalidates CloudFront - in that order.
-// Written in Node (not inline shell in package.json) so `${VAR}` expansion and quoting behave the
-// same on Windows cmd.exe and POSIX shells.
 //
-//   WEBSITE_BUCKET_NAME=<bucket> CLOUDFRONT_DISTRIBUTION_ID=<id> npm run deploy:website
+// The bucket and distribution come from the stack's outputs, so there is nothing to set by hand and
+// a recreated stack (which gets a new distribution ID) can't leave a stale value behind.
+//
+//   npm run deploy:website                deploy
+//   npm run deploy:website -- --dry-run   look up the stack and print what would run, change nothing
 import { execFileSync } from 'node:child_process';
 
-const { WEBSITE_BUCKET_NAME, CLOUDFRONT_DISTRIBUTION_ID } = process.env;
+import { getStackTargets } from './stack-outputs.mjs';
 
-const missing = ['WEBSITE_BUCKET_NAME', 'CLOUDFRONT_DISTRIBUTION_ID'].filter(
-  (name) => !process.env[name],
-);
-if (missing.length > 0) {
-  console.error(`Missing required environment variable(s): ${missing.join(', ')}`);
-  console.error(
-    'Both come from the stack outputs: WebsiteBucketName and DistributionId (sam list stack-outputs).',
-  );
-  process.exit(1);
+// Keep these in step with stack_name, profile and region in samconfig.toml
+const STACK_NAME = 'ironbear';
+const AWS_PROFILE = 'ironbear';
+const AWS_REGION = 'us-east-1';
+
+const awsFlags = ['--profile', AWS_PROFILE, '--region', AWS_REGION];
+const dryRun = process.argv.includes('--dry-run');
+
+function lookUpStack() {
+  console.log(`Looking up stack ${STACK_NAME} (profile ${AWS_PROFILE}, ${AWS_REGION})...`);
+  let json;
+  try {
+    json = execFileSync(
+      'aws',
+      ['cloudformation', 'describe-stacks', '--stack-name', STACK_NAME, '--output', 'json', ...awsFlags],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] },
+    );
+  } catch (error) {
+    // aws prints the reason (expired credentials, missing stack, no permission) to stderr
+    const reason = error.stderr?.toString().trim() || error.message;
+    throw new Error(`Could not read stack ${STACK_NAME}:\n${reason}`);
+  }
+  return getStackTargets(JSON.parse(json), STACK_NAME);
 }
 
 function run(command, args) {
   console.log(`> ${command} ${args.join(' ')}`);
-  // shell is needed for `npm` (npm.cmd on Windows); args here are fixed or from validated env vars
+  if (dryRun) return;
+  // `npm` is npm.cmd on Windows, which needs a shell; every argument here is a fixed string or a
+  // value read from our own stack outputs
   execFileSync(command, args, { stdio: 'inherit', shell: process.platform === 'win32' });
 }
 
-// Each step throws on a non-zero exit, so a failed build or sync never reaches the invalidation.
-run('npm', ['--prefix', 'website', 'run', 'build']);
-run('aws', ['s3', 'sync', 'website/dist', `s3://${WEBSITE_BUCKET_NAME}/`, '--delete']);
-run('aws', [
-  'cloudfront',
-  'create-invalidation',
-  '--distribution-id',
-  CLOUDFRONT_DISTRIBUTION_ID,
-  '--paths',
-  '/*',
-]);
+try {
+  const { bucketName, distributionId } = lookUpStack();
+  console.log(`Bucket: ${bucketName}\nDistribution: ${distributionId}\n`);
+  if (dryRun) console.log('Dry run: showing the steps without running them.\n');
+
+  // Each step throws on a non-zero exit, so a failed build or sync never reaches the invalidation.
+  run('npm', ['--prefix', 'website', 'run', 'build']);
+  run('aws', ['s3', 'sync', 'website/dist', `s3://${bucketName}/`, '--delete', ...awsFlags]);
+  run('aws', [
+    'cloudfront',
+    'create-invalidation',
+    '--distribution-id',
+    distributionId,
+    '--paths',
+    '/*',
+    ...awsFlags,
+  ]);
+} catch (error) {
+  console.error(error.message);
+  process.exit(1);
+}

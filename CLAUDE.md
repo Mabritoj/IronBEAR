@@ -82,10 +82,12 @@ export function Button({ label, onClick, variant = 'primary' }: ButtonProps) {
 
 ### Deployment
 
-`website/` is a static site deployed independently of the SAM stack — `aws s3 sync` to the site bucket, then a CloudFront invalidation, in one npm script (`deploy:website`). The bucket name and distribution ID are passed as env vars each deploy, not looked up dynamically:
+`website/` is a static site deployed independently of the SAM stack — build, `aws s3 sync` to the site bucket, then a CloudFront invalidation, in one npm script (`deploy:website`, run from the repo root). No env vars: `scripts/deploy-website.mjs` reads the bucket name and distribution ID from the deployed stack's `WebsiteBucketName` and `DistributionId` outputs, so a recreated stack can't leave a stale ID behind. The stack name, AWS profile and region are constants at the top of that script and must match `samconfig.toml`. It needs `cloudformation:DescribeStacks` as well as the S3 and CloudFront permissions.
 
 ```
-WEBSITE_BUCKET_NAME=<bucket> CLOUDFRONT_DISTRIBUTION_ID=<id> npm run deploy:website
+npm run deploy:website                # build, sync, invalidate
+npm run deploy:website -- --dry-run   # look up the stack and print the steps without running them
+npm run test:scripts                  # unit tests for the stack-output lookup (Node's built-in runner)
 ```
 
 ## Backend (AWS SAM)
