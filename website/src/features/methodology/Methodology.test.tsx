@@ -20,7 +20,7 @@ describe('Methodology', () => {
   it('shows a tools line on each phase card', () => {
     render(<Methodology />);
     expect(screen.getByText('React · NodeJS · AI · MCP')).toBeInTheDocument();
-    expect(screen.getByText('AWS')).toBeInTheDocument();
+    expect(screen.getByText('AWS · GitHub · IaC')).toBeInTheDocument();
     expect(screen.getByText('Jira · Confluence')).toBeInTheDocument();
   });
 

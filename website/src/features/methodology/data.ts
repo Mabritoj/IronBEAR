@@ -24,7 +24,7 @@ export const phases: Phase[] = [
     title: 'DEPLOY',
     description:
       'Ship through infrastructure as code. The whole stack lives in a template, so every release is repeatable and easy to review.',
-    stack: 'AWS',
+    stack: 'AWS · GitHub · IaC',
   },
   {
     id: 'iterate',
