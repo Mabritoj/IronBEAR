@@ -1,0 +1,15 @@
+# Copy to samconfig.toml (gitignored) and fill in your own values.
+# The stack must be deployed to us-east-1: CloudFront only accepts certificates from there.
+version = 0.1
+
+[prd]
+[prd.deploy.parameters]
+stack_name = "ironbear-prd"
+s3_prefix = "ironbear-prd"
+region = "us-east-1"
+resolve_s3 = true
+confirm_changeset = true
+# HostedZoneId: the existing Route53 public hosted zone for the domain (starts with Z).
+# WebsiteBucketName: must be globally unique across all of S3.
+parameter_overrides = "DomainName=\"ironbear.dev\" HostedZoneId=\"ZXXXXXXXXXXXXXXXXXXXX\" WebsiteBucketName=\"ironbear-prd-website\""
+tags = "BACKUP=\"ironbear-prd\""

@@ -2,7 +2,7 @@
 
 React 19 + TypeScript 5.x single-page application (`website/`) backed by an AWS SAM Node.js/TypeScript Lambda backend (repo root). Two independent npm projects in one repo — no shared `package.json`, no npm workspaces.
 
-**Repo status:** fresh repo. Nothing below is scaffolded yet — `website/`, `handlers/`, `layers/`, `infrastructure/`, `template.yaml`, and `samconfig.toml` are all *planned* layouts, not existing files. Check the tree before assuming something exists.
+**Repo status:** `website/` (the landing page), `infrastructure/cloudfront.yaml`, `template.yaml` (root stack: just `CloudFrontStack` for now), `samconfig.toml.example`, and `scripts/deploy-website.mjs` exist. `handlers/`, `layers/`, `shared-types/`, and the root `tsconfig.json`/`jest.config.cjs` are still *planned* layouts — created when the first Lambda is added. There is only a `[prd]` environment in `samconfig.toml` (no `[dev]`), and the stack must deploy to `us-east-1` (CloudFront certificates). Check the tree before assuming something exists.
 
 ## Frontend (`website/`)
 

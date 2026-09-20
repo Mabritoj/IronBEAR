@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: ironbear.dev - static website hosted on CloudFront
+
+# CloudFront only accepts ACM certificates from us-east-1, and the certificate lives in the
+# nested stack, so this whole stack must be deployed there.
+Rules:
+  RequireUsEast1:
+    Assertions:
+      - Assert: !Equals [!Ref 'AWS::Region', us-east-1]
+        AssertDescription: Deploy this stack to us-east-1 (required for CloudFront certificates).
+
+Parameters:
+  DomainName:
+    Type: String
+    Description: Apex domain served by the site. www.<DomainName> is added automatically.
+  HostedZoneId:
+    Type: String
+    Description: ID of the existing Route53 public hosted zone for DomainName.
+  WebsiteBucketName:
+    Type: String
+    Description: Globally unique name of the private S3 bucket that holds the built site.
+
+Resources:
+  CloudFrontStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: infrastructure/cloudfront.yaml
+      Parameters:
+        DomainName: !Ref DomainName
+        HostedZoneId: !Ref HostedZoneId
+        WebsiteBucketName: !Ref WebsiteBucketName
+
+Outputs:
+  WebsiteBucketName:
+    Description: Bucket to sync the built site into (WEBSITE_BUCKET_NAME)
+    Value: !GetAtt CloudFrontStack.Outputs.WebsiteBucketName
+  DistributionId:
+    Description: Distribution to invalidate after a deploy (CLOUDFRONT_DISTRIBUTION_ID)
+    Value: !GetAtt CloudFrontStack.Outputs.DistributionId
+  DistributionDomainName:
+    Description: The distribution's own *.cloudfront.net domain
+    Value: !GetAtt CloudFrontStack.Outputs.DistributionDomainName
