@@ -19,8 +19,8 @@ describe('Methodology', () => {
 
   it('shows a tools line on each phase card', () => {
     render(<Methodology />);
-    expect(screen.getByText('TypeScript · React · Claude Code')).toBeInTheDocument();
-    expect(screen.getByText('AWS SAM · CloudFront')).toBeInTheDocument();
+    expect(screen.getByText('React · NodeJS · AI · MCP')).toBeInTheDocument();
+    expect(screen.getByText('AWS')).toBeInTheDocument();
     expect(screen.getByText('Jira · Confluence')).toBeInTheDocument();
   });
 
