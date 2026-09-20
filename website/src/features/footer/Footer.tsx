@@ -1,4 +1,4 @@
-import bearMark from '../../assets/bear-mark.png';
+import bearMark from '../../assets/bear-mark.webp';
 import { Container } from '../../components/Container';
 import { TextLink } from '../../components/TextLink';
 import styles from './Footer.module.css';

@@ -1,4 +1,4 @@
-import logoMark from '../../assets/logo-mark.png';
+import logoMark from '../../assets/logo-mark.webp';
 import { ButtonLink } from '../../components/ButtonLink';
 import { Container } from '../../components/Container';
 import styles from './Navigation.module.css';
