@@ -15,7 +15,7 @@ export const phases: Phase[] = [
     title: 'DEVELOP',
     description:
       'Build in small, typed, tested steps. Clear interfaces and fast tests make every change easy to trust.',
-    stack: 'TypeScript · React · Claude Code',
+    stack: 'React · NodeJS · AI · MCP',
   },
   {
     id: 'deploy',
@@ -24,7 +24,7 @@ export const phases: Phase[] = [
     title: 'DEPLOY',
     description:
       'Ship through infrastructure as code. The whole stack lives in a template, so every release is repeatable and easy to review.',
-    stack: 'AWS SAM · CloudFront',
+    stack: 'AWS',
   },
   {
     id: 'iterate',
