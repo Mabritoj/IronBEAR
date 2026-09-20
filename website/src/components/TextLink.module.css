@@ -4,6 +4,11 @@
   white-space: nowrap;
 }
 
+/* No destination yet: dim it so it doesn't read as a live link */
+.link:not(.active) {
+  opacity: 0.55;
+}
+
 .active:hover {
   color: var(--color-accent);
 }
