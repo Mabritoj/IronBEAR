@@ -1,4 +1,4 @@
-import bearMark from '../../assets/bear-mark.png';
+import bearMark from '../../assets/bear-mark.webp';
 import { ButtonLink } from '../../components/ButtonLink';
 import { Container } from '../../components/Container';
 import styles from './Hero.module.css';
