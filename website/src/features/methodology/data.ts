@@ -33,7 +33,7 @@ export const phases: Phase[] = [
     title: 'ADAPT',
     description:
       'Use what the data shows to shape the next iteration. Short feedback loops, less friction, and changes that stay small.',
-    stack: 'Rust · Go · Postgres',
+    stack: 'Jira · Confluence',
   },
 ];
 
