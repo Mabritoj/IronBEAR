@@ -14,7 +14,7 @@ describe('Contact', () => {
   it('links to the repositories on GitHub', () => {
     render(<Contact />);
     const link = screen.getByRole('link', { name: 'View repositories' });
-    expect(link).toHaveAttribute('href', 'https://github.com/ironbear');
+    expect(link).toHaveAttribute('href', 'https://github.com/mabritoj');
     expect(link).toHaveAttribute('target', '_blank');
   });
 });

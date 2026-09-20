@@ -4,10 +4,10 @@ import { TextLink } from './TextLink';
 
 describe('TextLink', () => {
   it('renders a link when an href is given', () => {
-    render(<TextLink label="GITHUB / FORGE" href="https://github.com/ironbear" />);
+    render(<TextLink label="GITHUB / FORGE" href="https://github.com/mabritoj" />);
     expect(screen.getByRole('link', { name: 'GITHUB / FORGE' })).toHaveAttribute(
       'href',
-      'https://github.com/ironbear',
+      'https://github.com/mabritoj',
     );
   });
 

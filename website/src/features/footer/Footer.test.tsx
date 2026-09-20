@@ -13,7 +13,7 @@ describe('Footer', () => {
     render(<Footer />);
     expect(screen.getByRole('link', { name: 'GitHub' })).toHaveAttribute(
       'href',
-      'https://github.com/ironbear',
+      'https://github.com/mabritoj',
     );
     expect(screen.getByText(/LinkedIn/)).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'LinkedIn' })).not.toBeInTheDocument();

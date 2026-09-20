@@ -1,6 +1,7 @@
 import { ButtonLink } from '../../components/ButtonLink';
 import { Container } from '../../components/Container';
 import { SectionLabel } from '../../components/SectionLabel';
+import { GITHUB_URL } from '../../config/site';
 import styles from './Contact.module.css';
 
 export function Contact() {
@@ -21,7 +22,7 @@ export function Contact() {
           <div className={styles.card}>
             <p className={styles.cardLabel}>Source</p>
             <p className={styles.cardTitle}>Read the source.</p>
-            <ButtonLink label="View repositories" href="https://github.com/ironbear" external />
+            <ButtonLink label="View repositories" href={GITHUB_URL} external />
           </div>
         </div>
       </Container>
