@@ -76,7 +76,7 @@ export function Button({ label, onClick, variant = 'primary' }: ButtonProps) {
 ### Responsive Design
 
 - All UI must scale down to phone widths (~320px) and work on tablets, not just desktop.
-- Choose the app's breakpoints when the first layout is built and record them here; reuse them everywhere rather than introducing per-component values.
+- Breakpoints (defined in `website/src/styles/tokens.css`; custom properties can't be used inside `@media`, so use these literals): tablet `@media (max-width: 1024px)`, phone `@media (max-width: 640px)`. Reuse them everywhere rather than introducing per-component values.
 - Any fixed-pixel-width media (SVGs, images) inside a CSS Grid or Flex item must use fluid sizing (`width: 100%; max-width: <intrinsic>px`), not a hard `width: 300px`. A grid/flex item with a fixed-size child won't shrink below that child's size by default, which silently forces horizontal page overflow on narrow viewports — add `min-width: 0` on grid/flex items as a defensive default when they may contain fixed-size or long unbreakable content.
 - When verifying UI changes in a browser, check at minimum one phone width (~375px) and tablet portrait (768px) in addition to desktop.
 
