@@ -21,7 +21,7 @@ export function Hero() {
             </h1>
             <div className={styles.motto}>
               <span className={styles.divider} aria-hidden="true" />
-              <p>Orchestrate | Observe | Adapt</p>
+              <p>Develop | Deploy | Iterate</p>
             </div>
             <p className={styles.intro}>
               IronBEAR designs and builds developer tooling, integrations, and automation. Each
