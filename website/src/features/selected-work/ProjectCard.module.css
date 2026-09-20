@@ -37,8 +37,8 @@
 .copy {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 24px;
+  align-self: start;
   min-width: 0;
 }
 
