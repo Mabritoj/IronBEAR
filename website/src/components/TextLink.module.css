@@ -1,0 +1,9 @@
+.link {
+  font-family: var(--font-mono);
+  font-size: inherit;
+  white-space: nowrap;
+}
+
+.active:hover {
+  color: var(--color-accent);
+}
