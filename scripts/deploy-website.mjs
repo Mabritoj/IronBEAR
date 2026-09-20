@@ -37,9 +37,19 @@ function lookUpStack() {
 function run(command, args) {
   console.log(`> ${command} ${args.join(' ')}`);
   if (dryRun) return;
-  // `npm` is npm.cmd on Windows, which needs a shell; every argument here is a fixed string or a
-  // value read from our own stack outputs
-  execFileSync(command, args, { stdio: 'inherit', shell: process.platform === 'win32' });
+  execFileSync(command, args, { stdio: 'inherit' });
+}
+
+// `npm` is npm.cmd on Windows, and running a .cmd needs a shell (which Node now warns about). npm
+// tells scripts it launches where its own CLI file is, so run that with node directly instead.
+function runNpm(args) {
+  const npmCli = process.env.npm_execpath;
+  if (!npmCli) {
+    throw new Error('Run this through npm: npm run deploy:website');
+  }
+  console.log(`> npm ${args.join(' ')}`);
+  if (dryRun) return;
+  execFileSync(process.execPath, [npmCli, ...args], { stdio: 'inherit' });
 }
 
 try {
@@ -48,7 +58,7 @@ try {
   if (dryRun) console.log('Dry run: showing the steps without running them.\n');
 
   // Each step throws on a non-zero exit, so a failed build or sync never reaches the invalidation.
-  run('npm', ['--prefix', 'website', 'run', 'build']);
+  runNpm(['--prefix', 'website', 'run', 'build']);
   run('aws', ['s3', 'sync', 'website/dist', `s3://${bucketName}/`, '--delete', ...awsFlags]);
   run('aws', [
     'cloudfront',
