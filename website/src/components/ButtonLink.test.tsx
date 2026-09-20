@@ -11,7 +11,7 @@ describe('ButtonLink', () => {
   });
 
   it('opens external links in a new tab safely', () => {
-    render(<ButtonLink label="GITHUB" href="https://github.com/ironbear" external />);
+    render(<ButtonLink label="GITHUB" href="https://github.com/mabritoj" external />);
     const link = screen.getByRole('link', { name: 'GITHUB' });
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');

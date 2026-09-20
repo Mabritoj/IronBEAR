@@ -11,7 +11,7 @@ export function Footer() {
           <img className={styles.logo} src={bearMark} alt="IronBEAR" width={120} height={32} />
           <ul className={styles.social} aria-label="Social links">
             <li>
-              <TextLink label="GitHub" href="https://github.com/ironbear" />
+              <TextLink label="GitHub" href="https://github.com/mabritoj" />
             </li>
             <li>
               <TextLink label="LinkedIn" />

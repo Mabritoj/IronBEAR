@@ -11,7 +11,7 @@ export function Hero() {
           <div className={styles.copy}>
             <p className={styles.availability}>
               <span className={styles.status} aria-hidden="true" />
-              ACCEPTING SELECT ENGAGEMENTS
+              ACTIVE DEVELOPMENT
             </p>
             <h1 id="hero-title" className={styles.title}>
               <span>ORCHESTRATING</span>
@@ -30,7 +30,7 @@ export function Hero() {
               <ButtonLink label="VIEW SELECTED WORK" href="#work" />
               <ButtonLink
                 label="GITHUB / IRONBEAR"
-                href="https://github.com/ironbear"
+                href="https://github.com/mabritoj"
                 variant="secondary"
                 external
               />

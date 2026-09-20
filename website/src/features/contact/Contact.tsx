@@ -21,7 +21,7 @@ export function Contact() {
           <div className={styles.card}>
             <p className={styles.cardLabel}>Source</p>
             <p className={styles.cardTitle}>Read the source.</p>
-            <ButtonLink label="View repositories" href="https://github.com/ironbear" external />
+            <ButtonLink label="View repositories" href="https://github.com/mabritoj" external />
           </div>
         </div>
       </Container>

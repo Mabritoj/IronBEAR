@@ -23,7 +23,7 @@ export const projects: Project[] = [
     technologies: ['RUST', 'KAFKA', 'CLICKHOUSE'],
     metric: '4.2B EVENTS / DAY',
     repoLabel: 'GITHUB / FORGE',
-    repoUrl: 'https://github.com/ironbear',
+    repoUrl: 'https://github.com/mabritoj',
     featured: true,
   },
   {
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     technologies: ['GO', 'NIX', 'GITHUB ACTIONS'],
     metric: '38% FASTER BOOTSTRAP',
     repoLabel: 'GITHUB / NORTHSTAR',
-    repoUrl: 'https://github.com/ironbear',
+    repoUrl: 'https://github.com/mabritoj',
   },
   {
     id: 'bastion',
@@ -46,6 +46,6 @@ export const projects: Project[] = [
     technologies: ['TYPESCRIPT', 'POSTGRES', 'OPA'],
     metric: 'ZERO STANDING ACCESS',
     repoLabel: 'GITHUB / BASTION',
-    repoUrl: 'https://github.com/ironbear',
+    repoUrl: 'https://github.com/mabritoj',
   },
 ];

@@ -18,7 +18,7 @@ describe('Hero', () => {
     );
     expect(screen.getByRole('link', { name: 'GITHUB / IRONBEAR' })).toHaveAttribute(
       'href',
-      'https://github.com/ironbear',
+      'https://github.com/mabritoj',
     );
   });
 

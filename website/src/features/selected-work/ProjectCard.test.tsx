@@ -11,7 +11,7 @@ const project: Project = {
   technologies: ['RUST', 'GO'],
   metric: '10X FASTER',
   repoLabel: 'GITHUB / DEMO',
-  repoUrl: 'https://github.com/ironbear',
+  repoUrl: 'https://github.com/mabritoj',
 };
 
 describe('ProjectCard', () => {
@@ -30,7 +30,7 @@ describe('ProjectCard', () => {
     render(<ProjectCard project={project} />);
     expect(screen.getByRole('link', { name: 'GITHUB / DEMO' })).toHaveAttribute(
       'href',
-      'https://github.com/ironbear',
+      'https://github.com/mabritoj',
     );
   });
 
