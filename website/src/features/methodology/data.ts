@@ -15,7 +15,7 @@ export const phases: Phase[] = [
     title: 'DEVELOP',
     description:
       'Build in small, typed, tested steps. Clear interfaces and fast tests make every change easy to trust.',
-    stack: 'React · NodeJS · AI · MCP',
+    stack: 'React · Node.js · Claude Code · MCP',
   },
   {
     id: 'deploy',
