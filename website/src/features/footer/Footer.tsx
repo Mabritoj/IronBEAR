@@ -1,7 +1,7 @@
 import bearMark from '../../assets/bear-mark.webp';
 import { Container } from '../../components/Container';
 import { TextLink } from '../../components/TextLink';
-import { GITHUB_URL } from '../../config/site';
+import { GITHUB_URL, LINKEDIN_URL } from '../../config/site';
 import styles from './Footer.module.css';
 
 export function Footer() {
@@ -15,7 +15,7 @@ export function Footer() {
               <TextLink label="GitHub" href={GITHUB_URL} />
             </li>
             <li>
-              <TextLink label="LinkedIn" />
+              <TextLink label="LinkedIn" href={LINKEDIN_URL} />
             </li>
           </ul>
         </div>

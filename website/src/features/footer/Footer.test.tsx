@@ -9,14 +9,14 @@ describe('Footer', () => {
     expect(screen.getByRole('img', { name: 'IronBEAR' })).toBeInTheDocument();
   });
 
-  it('links GitHub and shows LinkedIn as inert text until a URL exists', () => {
+  it('links GitHub and LinkedIn in a new tab', () => {
     render(<Footer />);
-    expect(screen.getByRole('link', { name: 'GitHub' })).toHaveAttribute(
-      'href',
-      'https://github.com/mabritoj',
-    );
-    expect(screen.getByText(/LinkedIn/)).toBeInTheDocument();
-    expect(screen.queryByRole('link', { name: 'LinkedIn' })).not.toBeInTheDocument();
+    const github = screen.getByRole('link', { name: 'GitHub' });
+    expect(github).toHaveAttribute('href', 'https://github.com/mabritoj');
+    const linkedin = screen.getByRole('link', { name: 'LinkedIn' });
+    expect(linkedin).toHaveAttribute('href', 'https://www.linkedin.com/in/jonathanmabrito/');
+    expect(linkedin).toHaveAttribute('target', '_blank');
+    expect(linkedin).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
   it('shows the current year in the copyright line', () => {
