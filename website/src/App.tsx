@@ -1,3 +1,5 @@
+import { Contact } from './features/contact/Contact';
+import { Footer } from './features/footer/Footer';
 import { Hero } from './features/hero/Hero';
 import { Navigation } from './features/hero/Navigation';
 import { Methodology } from './features/methodology/Methodology';
@@ -11,7 +13,9 @@ export function App() {
         <Hero />
         <SelectedWork />
         <Methodology />
+        <Contact />
       </main>
+      <Footer />
     </div>
   );
 }
