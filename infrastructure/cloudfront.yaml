@@ -206,10 +206,10 @@ Resources:
 
 Outputs:
   WebsiteBucketName:
-    Description: Bucket to sync the built site into (WEBSITE_BUCKET_NAME)
+    Description: Bucket the built site is synced into (read by scripts/deploy-website.mjs)
     Value: !Ref WebsiteBucket
   DistributionId:
-    Description: Distribution to invalidate after a deploy (CLOUDFRONT_DISTRIBUTION_ID)
+    Description: Distribution invalidated after a site deploy (read by scripts/deploy-website.mjs)
     Value: !Ref WebsiteDistribution
   DistributionDomainName:
     Description: The distribution's own *.cloudfront.net domain
