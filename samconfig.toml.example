@@ -10,6 +10,7 @@ region = "us-east-1"
 resolve_s3 = true
 confirm_changeset = true
 # HostedZoneId: the existing Route53 public hosted zone for the domain (starts with Z).
-# WebsiteBucketName: must be globally unique across all of S3.
+# WebsiteBucketName: must be globally unique across all of S3. Lowercase letters, digits and
+# dashes only (3-60 chars); NO dots, so don't reuse the domain name (ironbear.dev) as the bucket name.
 parameter_overrides = "DomainName=\"ironbear.dev\" HostedZoneId=\"ZXXXXXXXXXXXXXXXXXXXX\" WebsiteBucketName=\"ironbear-prd-website\""
 tags = "BACKUP=\"ironbear-prd\""

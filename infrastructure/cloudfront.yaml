@@ -14,8 +14,12 @@ Parameters:
     AllowedPattern: ^Z[A-Z0-9]+$
   WebsiteBucketName:
     Type: String
-    Description: Globally unique name of the private S3 bucket that holds the built site.
-    AllowedPattern: ^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$
+    Description: >-
+      Globally unique name of the private S3 bucket that holds the built site. Lowercase letters,
+      digits, and dashes only (3-60 chars). No dots: this name is reused in CloudFront resource
+      names, which reject dots, and S3's HTTPS certificate doesn't match dotted bucket names.
+    AllowedPattern: ^[a-z0-9][a-z0-9-]{1,58}[a-z0-9]$
+    ConstraintDescription: Use 3-60 lowercase letters, digits, or dashes, with no dots (e.g. ironbear-prd-website).
 
 Resources:
   WebsiteBucket:

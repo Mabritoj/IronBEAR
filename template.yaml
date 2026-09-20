@@ -11,15 +11,23 @@ Rules:
         AssertDescription: Deploy this stack to us-east-1 (required for CloudFront certificates).
 
 Parameters:
+  # The same constraints are repeated in infrastructure/cloudfront.yaml. Checking them here too
+  # makes a bad value fail when the changeset is created, not halfway through the nested stack.
   DomainName:
     Type: String
     Description: Apex domain served by the site. www.<DomainName> is added automatically.
+    AllowedPattern: ^([a-z0-9-]+\.)+[a-z]{2,}$
   HostedZoneId:
     Type: String
     Description: ID of the existing Route53 public hosted zone for DomainName.
+    AllowedPattern: ^Z[A-Z0-9]+$
   WebsiteBucketName:
     Type: String
-    Description: Globally unique name of the private S3 bucket that holds the built site.
+    Description: >-
+      Globally unique name of the private S3 bucket that holds the built site. Lowercase letters,
+      digits, and dashes only (3-60 chars). No dots.
+    AllowedPattern: ^[a-z0-9][a-z0-9-]{1,58}[a-z0-9]$
+    ConstraintDescription: Use 3-60 lowercase letters, digits, or dashes, with no dots (e.g. ironbear-prd-website).
 
 Resources:
   CloudFrontStack:
