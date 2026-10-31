@@ -1,0 +1,54 @@
+/*
+ * Design tokens, extracted from the Figma "ironbear.dev homepage" frame (1440px desktop).
+ *
+ * Breakpoints (CSS custom properties can't be used inside @media, so use these literals):
+ *   tablet: @media (max-width: 1024px)
+ *   phone:  @media (max-width: 640px)
+ */
+:root {
+  /* Colour */
+  --color-bg: #0a0e12;
+  --color-surface: #111820;
+  --color-surface-raised: #18222c;
+  --color-border: #2a3640;
+  --color-paper: #f8fafb;
+  --color-paper-alt: #e8edf0;
+  --color-text: #f8fafb;
+  --color-text-muted: #b7c1c8;
+  --color-text-subtle: #71808c;
+  --color-ink: #0a0e12;
+  --color-ink-muted: #273540;
+  --color-accent: #168bff;
+  --color-accent-soft: #80c4ff;
+  /* Darker variants for small text on light (paper) backgrounds, to reach WCAG AA (4.5:1) */
+  --color-accent-on-paper: #0b63c4;
+  --color-text-subtle-on-paper: #56636e;
+
+  /* Typeface */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Type scale: fluid between phone (~375px) and the 1440px design size */
+  --fs-display: clamp(2.25rem, 1.2rem + 5.4vw, 5.75rem); /* 92px */
+  --fs-h2: clamp(2rem, 1.3rem + 3vw, 3.625rem); /* 58px */
+  --fs-h3: clamp(1.75rem, 1.3rem + 1.9vw, 2.625rem); /* 42px */
+  --fs-h4: 2rem; /* 32px */
+  --fs-metric: 1.5625rem; /* 25px */
+  --fs-lead: 1.25rem; /* 20px */
+  --fs-body-lg: 1.125rem; /* 18px */
+  --fs-body: 1rem; /* 16px */
+  --fs-mono: 0.8125rem; /* 13px */
+  --fs-mono-sm: 0.6875rem; /* 11px */
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+
+  /* Layout */
+  --content-max: 1296px;
+  --gutter: clamp(1.25rem, 0.2rem + 4.5vw, 4.5rem); /* 72px on desktop */
+  --section-pad-y: clamp(4rem, 2rem + 6vw, 7rem); /* 112px on desktop */
+}

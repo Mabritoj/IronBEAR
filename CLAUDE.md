@@ -2,7 +2,7 @@
 
 React 19 + TypeScript 5.x single-page application (`website/`) backed by an AWS SAM Node.js/TypeScript Lambda backend (repo root). Two independent npm projects in one repo — no shared `package.json`, no npm workspaces.
 
-**Repo status:** fresh repo. Nothing below is scaffolded yet — `website/`, `handlers/`, `layers/`, `infrastructure/`, `template.yaml`, and `samconfig.toml` are all *planned* layouts, not existing files. Check the tree before assuming something exists.
+**Repo status:** `website/` (the landing page), `infrastructure/cloudfront.yaml`, `template.yaml` (root stack: just `CloudFrontStack` for now), `samconfig.toml.example`, and `scripts/deploy-website.mjs` exist. `handlers/`, `layers/`, `shared-types/`, and the root `tsconfig.json`/`jest.config.cjs` are still *planned* layouts — created when the first Lambda is added. There is only a `[prd]` environment in `samconfig.toml` (no `[dev]`), and the stack must deploy to `us-east-1` (CloudFront certificates). Check the tree before assuming something exists.
 
 ## Frontend (`website/`)
 
@@ -76,16 +76,18 @@ export function Button({ label, onClick, variant = 'primary' }: ButtonProps) {
 ### Responsive Design
 
 - All UI must scale down to phone widths (~320px) and work on tablets, not just desktop.
-- Choose the app's breakpoints when the first layout is built and record them here; reuse them everywhere rather than introducing per-component values.
+- Breakpoints (defined in `website/src/styles/tokens.css`; custom properties can't be used inside `@media`, so use these literals): tablet `@media (max-width: 1024px)`, phone `@media (max-width: 640px)`. Reuse them everywhere rather than introducing per-component values.
 - Any fixed-pixel-width media (SVGs, images) inside a CSS Grid or Flex item must use fluid sizing (`width: 100%; max-width: <intrinsic>px`), not a hard `width: 300px`. A grid/flex item with a fixed-size child won't shrink below that child's size by default, which silently forces horizontal page overflow on narrow viewports — add `min-width: 0` on grid/flex items as a defensive default when they may contain fixed-size or long unbreakable content.
 - When verifying UI changes in a browser, check at minimum one phone width (~375px) and tablet portrait (768px) in addition to desktop.
 
 ### Deployment
 
-`website/` is a static site deployed independently of the SAM stack — `aws s3 sync` to the site bucket, then a CloudFront invalidation, in one npm script (`deploy:website`). The bucket name and distribution ID are passed as env vars each deploy, not looked up dynamically:
+`website/` is a static site deployed independently of the SAM stack — build, `aws s3 sync` to the site bucket, then a CloudFront invalidation, in one npm script (`deploy:website`, run from the repo root). No env vars: `scripts/deploy-website.mjs` reads the bucket name and distribution ID from the deployed stack's `WebsiteBucketName` and `DistributionId` outputs, so a recreated stack can't leave a stale ID behind. The stack name, AWS profile and region are constants at the top of that script and must match `samconfig.toml`. It needs `cloudformation:DescribeStacks` as well as the S3 and CloudFront permissions.
 
 ```
-WEBSITE_BUCKET_NAME=<bucket> CLOUDFRONT_DISTRIBUTION_ID=<id> npm run deploy:website
+npm run deploy:website                # build, sync, invalidate
+npm run deploy:website -- --dry-run   # look up the stack and print the steps without running them
+npm run test:scripts                  # unit tests for the stack-output lookup (Node's built-in runner)
 ```
 
 ## Backend (AWS SAM)
